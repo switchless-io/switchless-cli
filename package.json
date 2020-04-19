@@ -1,6 +1,6 @@
 {
   "name": "switchless-cli",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "This helps you setup scafoldings on a sailsjs project",
   "main": "index.js",
   "scripts": {
