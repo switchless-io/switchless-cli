@@ -1,21 +1,21 @@
 {
-  "name": "business-stack-generator",
+  "name": "switchless-cli",
   "version": "1.4.1",
-  "description": "This sets up a business stack on sailsjs",
+  "description": "This helps you setup scafoldings on a sailsjs project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AtherEnergy/business-stack-generator.git"
+    "url": "git+https://github.com/switchless-io/switchless-cli.git"
   },
-  "author": "",
+  "author": "Alex J V <alexjv89@gmail.com> (www.echoalex.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AtherEnergy/business-stack-generator/issues"
+    "url": "https://github.com/switchless-io/switchless-cli/issues"
   },
-  "homepage": "https://github.com/AtherEnergy/business-stack-generator#readme",
+  "homepage": "https://switchless.io",
   "dependencies": {
     "async": "^2.6.1",
     "cpx": "^1.5.0",
@@ -24,6 +24,6 @@
     "path": "^0.12.7"
   },
   "bin": {
-    "business-stack-generator": "./index.js"
+    "switchless-cli": "index.js"
   }
 }
