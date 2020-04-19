@@ -122,17 +122,17 @@ var checkInstallation = function (callback) {
 
 var main = function (callback) {
 	// check if business-stack-generator is installed as dev dependency
-	var package = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+	// var package = JSON.parse(fs.readFileSync('package.json', 'utf8'));
 
-	if (!_.get(package, 'devDependencies["business-stack-generator"]')) {
-		console.log("\--------------------------------------------------------------------------------\
-			\ninstall business-stack-generator package as  dev dependencies \
-			\n\
-			\nnpm install --save-dev business-stack-generator\
-			\n--------------------------------------------------------------------------------\
-		");
-		return callback();
-	}
+	// if (!_.get(package, 'devDependencies["business-stack-generator"]')) {
+	// 	console.log("\--------------------------------------------------------------------------------\
+	// 		\ninstall business-stack-generator package as  dev dependencies \
+	// 		\n\
+	// 		\nnpm install --save-dev business-stack-generator\
+	// 		\n--------------------------------------------------------------------------------\
+	// 	");
+	// 	return callback();
+	// }
 
 	inquirer.prompt([
 		{
