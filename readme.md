@@ -12,40 +12,26 @@ This tech stack is more than good enough for 80% of the scenarios that you will 
 
 
 ### Usage
-```sh
-# install globally
-npm install -g switchless-cli
-
-# start using inside any sails project
-cd my_sails_project
-# run the command
-switchless-cli
-```
----
-
-#### Or
 
 ```sh
 # start using inside any sails project
 cd my_sails_project
 
 # Install locally
-npm install --save-dev switchless-cli@latest
+npm install --save-dev @switchless-io/cli@latest
 
 # run the command
-./node_modules/switchless-cli/index.js
+./node_modules/@switchless-io/cli/index.js
 ```
 
 ### Supports
-- [x] Bull
-- [x] Kue
-- [x] Sails Logger
-- [x] RateLimit
-- [x] Semantic UI
-- [x] Trix
-- [x] User Login
-- [x] Sentry
-- [x] Group Access Control
-- [ ] Helmet
-- [ ] Vue
-- [ ] Logstash
+- [x] Queue setup via Bull.js
+- [x] Setup for server logging via AWS Kinesis
+- [x] Rate-limiting middleware
+- [x] Scaffolding for Fomantic UI
+- [x] Scaffolding for Trix Editor
+- [x] Scaffolding for User Login
+- [x] Setup Error tracking via Sentry
+- [x] Scaffolding for Group Access Control
+- [ ] Web Security(coming soon)
+- [ ] Scaffolding for Vue(coming soon)

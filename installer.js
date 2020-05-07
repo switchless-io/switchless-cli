@@ -4,7 +4,7 @@ var cpx = require('cpx');
 
 var sails_folder = process.cwd();
 
-var package_folder = path.join(process.cwd(),'node_modules/business-stack-generator');
+var package_folder = path.join(process.cwd(),'node_modules/switchless-cli');
 module.exports={
 	installUserLogin:function(callback){
 

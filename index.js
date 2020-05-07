@@ -8,6 +8,11 @@ var fs = require('fs');
 var installer = require('./installer');
 var _ = require('lodash');
 
+const updateNotifier = require('update-notifier');
+const pkg = require('./package.json');
+ 
+updateNotifier({pkg}).notify();
+
 var initialize = function (outer_cb) {
 	async.series({
 		installBull: function (callback) {
