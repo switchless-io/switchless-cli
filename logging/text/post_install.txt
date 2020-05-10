@@ -1,5 +1,5 @@
 ------------------------------------------
-  Logging is implemented as a library in sails-helpers. 
+  Logging is implemented as a library in @switchless-io/util. 
   /config/log.js is overwritten
 
   #######################################
@@ -7,8 +7,7 @@
 
   ### 1) Make sure your http middleware looks something like this: 
     middleware: {
-      startRequestTimer: require('sails-helper').startRequestTimer,
-      myRequestLogger: require('sails-helper').requestLogger,
+      myRequestLogger: require('@switchless-io/util').requestLogger,
       order: [
         'startRequestTimer',
         'cookieParser',
@@ -24,25 +23,22 @@
         'favicon'
       ]
     }
-  Basically 'startRequestTimer' should be at the top. 'myRequestLogger' can come after 'bodyParser'
+  Place 'myRequestLogger' just after 'bodyParser' in the order array.
 
   -----------------------------------------
 
-  ### 2) Production log level
-  By default sails 1.x.x has log level as debug in production.js request log is printed as info. comment out log level in production.js
-
   ------------------------------------------
-  ### 3) Create firehose delivery streams for nodejs, nginx access and nginx error nginx_access_log_stream
+  ### 3) Create firehose delivery streams for nodejs, nginx access and nginx error in AWS Console.
   
-  pattern for nodejs stream name - k_<microservice>_nodejs_log
-  pattern for nginx access log stream name - k_<microservice>_nginx_access_log
-  pattern for nginx error log stream name - k_<microservice>_nginx_error_log
+  pattern for nodejs  firehose delivery stream- k_<microservice>_nodejs_log
+  pattern for nginx access firehose delivery stream - k_<microservice>_nginx_access_log
+  pattern for nginx error firehose delivery stream - k_<microservice>_nginx_error_log
 
   ------------------------------------------
 
-  ### 4) Configure .ebextensions/kinesis.config
-  values to be replaced:
-  replace - firehose.<region>.amazonaws.com with your aws region where you setup kinesis
-  replace - nginx_access_log_stream with your firehose nginx access stream
-  replace - nginx_error_log_stream with your firehose nginx error stream
-  replace - nodejs_log_stream with your firehose node app stream 
+  ### 4) Cli has created .ebextensions/kinesis.config in your sails project. Go .ebextensions/kinesis.config and replace these values.
+
+  replace region - firehose.<region>.amazonaws.com with your aws region where you setup kinesis
+  replace microservice - k_<microservice>_nginx_access_log with your microservice  
+  replace microservice - k_<microservice>_nginx_error_log with your microservice
+  replace microservice - k_<microservice>_nodejs_log with your microservice

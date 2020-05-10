@@ -27,6 +27,6 @@ module.exports.log = {
 	// level: 'info'
 	level: 'info',
 	inspect: false,
-	custom: require('sails-helper').getLogger()
+	custom: require('@switchless-io/util').helper.logger()
 
 };
