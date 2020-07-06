@@ -71,6 +71,7 @@ var installSpecific = function (callback) {
 				'user-login',
 				'kue',
 				'semantic',
+				'navbar',
 				'logging',
 				'ratelimit-policy',
 				'sendgrid',
@@ -114,6 +115,9 @@ var installSpecific = function (callback) {
 				break;
 			case 'paytmPayments':
 				installer.installPaytmPayments(callback);
+				break;
+			case 'navbar':
+				installer.installNavbar(callback);
 				break;
 		}
 		// callback(null);

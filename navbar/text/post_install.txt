@@ -1,0 +1,14 @@
+------------------------------------------
+  Layout.ejs and navbar is setup is setup. The following is added
+  /views/layout.ejs - Layout
+  /views/partials/navbar.ejs - Navbar
+
+
+  #######################################
+  Manual intervention required: 
+
+  ### 1) Modify config/views.js: 
+    set - 
+      layout: 'layout'
+  
+------------------------------------------

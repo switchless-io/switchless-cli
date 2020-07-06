@@ -114,5 +114,13 @@ module.exports={
 		var buf = fs.readFileSync(package_folder+'/paytmPayment/text/post_install.txt');
 		console.log(buf.toString());
 		callback(null);
-	}
+	},
+	installNavbar:function(callback){
+		cpx.copySync(package_folder+'/navbar/views/**', sails_folder+'/views');
+		var buf = fs.readFileSync(package_folder+'/navbar/text/post_install.txt');
+		console.log(buf.toString());
+		callback(null);
+	},
+
+
 }
