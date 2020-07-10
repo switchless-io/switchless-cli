@@ -72,6 +72,7 @@ var installSpecific = function (callback) {
 				'kue',
 				'semantic',
 				'navbar',
+				'gitignore',
 				'logging',
 				'ratelimit-policy',
 				'sendgrid',
@@ -118,6 +119,9 @@ var installSpecific = function (callback) {
 				break;
 			case 'navbar':
 				installer.installNavbar(callback);
+				break;
+			case 'gitignore':
+				installer.installGitignore(callback);
 				break;
 		}
 		// callback(null);

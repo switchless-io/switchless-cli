@@ -121,6 +121,12 @@ module.exports={
 		console.log(buf.toString());
 		callback(null);
 	},
+	installGitignore:function(callback){
+		cpx.copySync(package_folder+'/gitignore/.gitignore', sails_folder+'/views');
+		// var buf = fs.readFileSync(package_folder+'/navbar/text/post_install.txt');
+		console.log('gitignore added');
+		callback(null);
+	},
 
 
 }
