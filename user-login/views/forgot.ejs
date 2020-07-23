@@ -17,18 +17,33 @@
                             <input type="text" name="email" placeholder="E-mail address" required>
                         </div>
                     </div>
-                    <button class="ui green button" type="submit">Send link</button>
+                    <button class="ui green button" id="send_link" type="submit">Send link</button>
+                </div>
+                <div class="ui error message">
                 </div>
             </form>
             <% if(error){ %>
                 <div class="ui error message">
                     <%=error%>
                 </div>
-                <% }else if(message){ %>
+            <% }else if(message){ %>
                 <div class="ui positive message">
                     <%=message%>
                 </div>
-                <% } %>
+            <% } %>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.ui.form').form({
+            fields: {
+                email : 'email',
+                account_id:'empty',
+            },
+            onSuccess:function(e,fields){
+                $(this).addClass('loading');
+            },
+        });
+    });
+</script>
