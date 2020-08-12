@@ -6,6 +6,7 @@ var async = require('async');
 var path = require('path');
 var fs = require('fs');
 var installer = require('./installer');
+var initializer = require('./initializer');
 var _ = require('lodash');
 
 const updateNotifier = require('update-notifier');
@@ -13,51 +14,29 @@ const pkg = require('./package.json');
  
 updateNotifier({pkg}).notify();
 
-var initialize = function (outer_cb) {
-	async.series({
-		installBull: function (callback) {
-			console.log('\n\n\n---------------------------------------');
-			inquirer.prompt([
-				{
-					type: 'confirm',
-					name: 'bull',
-					message: 'Do you want to install Bull?',
-				},
-			]).then(answers => {
-				if (answers.bull) {
-					installer.installBull(callback);
-				} else {
-					console.log('Bull installation skipped');
-					callback(null);
-				}
-			});
+var initialize = function (callback) {
+	inquirer.prompt([
+		{
+			type: 'list',
+			name: 'initialize_what',
+			message: 'which flavor of switchless would you like to start with?',
+			choices: [
+				'api-backend',
+				'web-app',
+			],
 		},
-		installSomethingElse: function (callback) {
-			console.log('\n\n\n---------------------------------------');
-			inquirer.prompt([
-				{
-					type: 'confirm',
-					name: 'slack_service',
-					message: 'Do you want to install slack service?',
-				},
-			]).then(answers => {
-				if (answers.somthing) {
-					console.log(JSON.stringify(answers, null, '  '));
-					// cpx.copySync('kue/controllers/*', '../../api/controllers');
-					// cpx.copySync('kue/views/**', '../../views');
-					callback(null);
-				} else {
-					console.log('Slack installation skipped');
-					callback(null);
-				}
-			});
+	]).then(answers => {
+		switch (answers.initialize_what) {
+			case 'api-backend':
+				initializer.initialiseAPIBackend(callback);
+				break;
+			case 'web-app':
+				console.log('yo');
+				initializer.initialiseWebApp(callback);
+				break;
 		}
-
-	}, function (err, results) {
-		// console.log('\n\n\n---------------------------------------');
-		// console.log("everything done");
-		outer_cb(err);
-	})
+		// callback(null);
+	});
 }
 
 var installSpecific = function (callback) {
@@ -156,10 +135,10 @@ var main = function (callback) {
 				// console.log('going to do install');
 				installSpecific(callback);
 				break;
-			case 'check_installation':
-				// console.log('going to do check_installation');
-				initialize(callback);
-				break;
+			// case 'check_installation':
+			// 	// console.log('going to do check_installation');
+			// 	initialize(callback);
+			// 	break;
 
 		}
 

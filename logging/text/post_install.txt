@@ -7,7 +7,7 @@
 
   ### 1) Make sure your http middleware looks something like this: 
     middleware: {
-      myRequestLogger: require('@switchless-io/util').requestLogger,
+      myRequestLogger: require('@switchless-io/util').middleware.requestLogger,
       order: [
         'startRequestTimer',
         'cookieParser',

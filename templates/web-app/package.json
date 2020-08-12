@@ -1,0 +1,79 @@
+{
+  "name": "mralbert",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "@sailshq/connect-redis": "^3.2.1",
+    "@sailshq/lodash": "^3.10.3",
+    "@sailshq/socket.io-redis": "^5.2.0",
+    "@sentry/node": "^5.11.0",
+    "@switchless-io/util": "^3.2.3",
+    "async": "^3.1.1",
+    "aws-sdk": "^2.622.0",
+    "bcryptjs": "^2.4.3",
+    "bull": "^3.14.0",
+    "connect-redis": "^4.0.3",
+    "file-type": "^14.1.4",
+    "grunt": "1.0.4",
+    "hjson": "^3.2.1",
+    "inline-css": "^2.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "mailgun-js": "^0.22.0",
+    "moment-timezone": "^0.5.27",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-oauth2": "^1.5.0",
+    "query-string": "^6.12.1",
+    "razorpay": "^2.0.6",
+    "request": "^2.88.2",
+    "sails": "^1.2.3",
+    "sails-helper": "^3.2.0",
+    "sails-hook-grunt": "^4.0.0",
+    "sails-hook-orm": "^2.1.1",
+    "sails-hook-sockets": "^2.0.0",
+    "sails-postgresql": "^1.0.2",
+    "shelljs": "^0.8.4",
+    "simple-oauth2": "^4.1.0"
+  },
+  "devDependencies": {
+    "@switchless-io/cli": "^1.4.5",
+    "business-stack-generator": "^1.4.0",
+    "eslint": "5.16.0",
+    "inquirer": "^7.1.0",
+    "minimist": "^1.2.5",
+    "request-promise": "^4.2.5",
+    "sqlite3": "^4.2.0",
+    "switchless-api-wrapper": "^1.1.4",
+    "util": "^0.12.2"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node app.js",
+    "start_local_test": "node load_env.js && node app.js",
+    "tests_on_local": "node node_modules/.bin/codeceptjs run --steps -c tests/codecept.conf.js",
+    "only_some_tests": "node node_modules/.bin/codeceptjs run --steps -c tests/codecept.conf.js --grep @runonly",
+    "get_entire_gstr2a_details": "node node_modules/.bin/codeceptjs run --steps -c automations/codecept.conf.js --grep @runonly",
+    "automations": "node automations/automation.js",
+    "onboarding": "node automations/onboarding.js",
+    "monthly_activity": "node automations/monthly_activity.js",
+    "tests_on_runner": "node node_modules/.bin/codeceptjs run --steps -c tests/codecept.runner.conf.js",
+    "loadFixture": "node tests/fixtures/loadFixture.js"
+  },
+  "unwanted_scripts": {
+    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
+    "test2": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/**/*.test.js --exit",
+    "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
+    "custom-tests": "echo \"(No other custom tests yet.)\" && echo"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alex/mralbert.git"
+  },
+  "author": "alex",
+  "license": "",
+  "engines": {
+    "node": "^9.11"
+  }
+}
