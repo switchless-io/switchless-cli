@@ -127,6 +127,10 @@ module.exports={
 		console.log('gitignore added');
 		callback(null);
 	},
-
+	installMkdocs:function(callback){
+		cpx.copySync(package_folder+'/mkdocs/{**,.**}/{*,.*}', sails_folder);
+		console.log('put in the mkdocs template');
+		callback(null);
+	}
 
 }

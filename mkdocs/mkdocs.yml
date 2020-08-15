@@ -1,0 +1,24 @@
+site_name: Switchless docs
+theme:
+    name: null
+    custom_dir: 'docs/custom_theme2/'
+    sidebars: 
+        - about
+        - search
+extra:
+    logo: files/switchless_docs_logo.png
+    sidebars:
+        - about
+        - navigation
+    homepage_sidebars:
+        - about
+        - navigation
+
+plugins:
+    - search
+    # - encryptcontent:
+        # global_password: 'your_password'
+
+markdown_extensions:
+  - toc:
+      permalink: true

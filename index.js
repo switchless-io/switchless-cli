@@ -55,6 +55,7 @@ var installSpecific = function (callback) {
 				'logging',
 				'ratelimit-policy',
 				'sendgrid',
+				'mkdocs',
 				'trix',
 				'sentry',
 				'group-based-access',
@@ -101,6 +102,9 @@ var installSpecific = function (callback) {
 				break;
 			case 'gitignore':
 				installer.installGitignore(callback);
+				break;
+			case 'mkdocs':
+				installer.installMkdocs(callback);
 				break;
 		}
 		// callback(null);
