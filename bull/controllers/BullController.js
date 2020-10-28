@@ -122,5 +122,17 @@ module.exports = {
 			console.log('removed completed job #%d', r);
 			res.send(200,'ok')
 		});
+	},
+	addJob:async function(req,res){
+		await queue.add(req.body.name,JSON.parse(req.body.data));
+		res.redirect('/bull');
+	},
+	recreateJob:async function(req,res){
+		var locals={
+			moment: require('moment-timezone'),
+			layout: 'bull/layout'
+		}
+		locals.job = await queue.getJob(req.params.job_id);
+		res.view('bull/recreate_job',locals);
 	}
 };

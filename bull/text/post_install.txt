@@ -13,6 +13,8 @@ You will need to define the routes and policies manually.
 'POST /bull/retry':'BullController.retryJob',
 'POST /bull/delete':'BullController.deleteJob',
 'POST /bull/repeat/delete':'BullController.deleteRepeatJob',
+'POST /bull/job/add':'BullController.addJob',
+'GET /bull/job/:job_id/recreate':'BullController.recreateJob',
 
 2) ### Update policy.js ###
 BullController:{\

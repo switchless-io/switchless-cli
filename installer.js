@@ -61,7 +61,7 @@ module.exports={
 	},
 	installBull:function(callback){
 		// install bull npm package
-		require('child_process').execSync('npm install --save bull');		
+		// require('child_process').execSync('npm install --save bull');		
 		if (fs.existsSync(sails_folder+'/api/controllers/BullController.js'))
 		    console.log('BullController already exists. It will be over written.');
 

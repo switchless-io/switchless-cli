@@ -47,8 +47,8 @@ var installSpecific = function (callback) {
 			message: 'What would you like to install?',
 			choices: [
 				'bull',
-				'user-login',
-				'kue',
+				'user-login-test',
+				// 'kue',
 				'semantic',
 				'navbar',
 				'gitignore',

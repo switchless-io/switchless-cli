@@ -1,11 +1,17 @@
 <div>
 	<br><br><br>
 	<div class='ui container'>
-	 
-			
-		<h2>Stats:</h2>
+	 	<h1>Bull Ops:</h1>
+		<div class="ui pointing secondary menu">
+	 		<a class="item" href='/bull'>Overview</a>
+	 		<a class="item" href='/bull/active'>Active</a>
+	 		<a class="item" href='/bull/inactive'>Inactive</a>
+	 		<a class="item" href='/bull/delayed'>Delayed</a>
+	 		<a class="item" href='/bull/failed'>Failed</a>
+	 		<a class="item" href='/bull/complete'>Complete</a>
+	 	</div>
 
-		<h3>Queue:</h3>
+		<h3>Queue Stats:</h3>
 		<table class="ui celled structured table">
 			<thead>
 				<tr>
@@ -95,4 +101,6 @@
 			}
 		});
 	});
+	var path = window.location.pathname;
+	$('a[href="'+path+'"]').addClass('active');
 </script>

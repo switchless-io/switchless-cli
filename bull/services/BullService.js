@@ -1,3 +1,9 @@
+var async = require('async');
+
+
+var Bull = require( 'bull' );
+    // create our job queue
+var queue = new Bull('queue',{redis:sails.config.bull.redis});
 module.exports = {
     timeAgo: function (timestamp) {
         // sails.log.info("\n\n\ninside timeAgo");
