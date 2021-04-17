@@ -1,15 +1,33 @@
 <div>
 	<br><br><br>
 	<div class='ui container'>
-	 	<h1>Bull Ops:</h1>
+		<h1>Bull Ops: 
+			<div class="ui inline dropdown">
+				<div class="text">
+					<%=req.params.queue?req.params.queue:'queue'%>
+				</div>
+				<i class="dropdown icon"></i>
+				<div class="menu">
+					<a class="item" href='/bull/queue'>
+						queue
+					</a>
+					<a class="item" href='/bull/crawler'>
+						crawler
+					</a>
+					<a class="item" href='/bull/sync_portal_data'>
+						sync_portal_data
+					</a>
+				</div>
+			</div>
+		</h1>
 		<div class="ui pointing secondary menu">
-	 		<a class="item" href='/bull'>Overview</a>
-	 		<a class="item" href='/bull/active'>Active</a>
-	 		<a class="item" href='/bull/inactive'>Inactive</a>
-	 		<a class="item" href='/bull/delayed'>Delayed</a>
-	 		<a class="item" href='/bull/failed'>Failed</a>
-	 		<a class="item" href='/bull/complete'>Complete</a>
-	 	</div>
+			<a class="item" href='/bull/<%=req.params.queue%>'>Overview</a>
+			<a class="item" href='/bull/<%=req.params.queue%>/active'>Active</a>
+			<a class="item" href='/bull/<%=req.params.queue%>/inactive'>Inactive</a>
+			<a class="item" href='/bull/<%=req.params.queue%>/delayed'>Delayed</a>
+			<a class="item" href='/bull/<%=req.params.queue%>/failed'>Failed</a>
+			<a class="item" href='/bull/<%=req.params.queue%>/complete'>Complete</a>
+		</div>
 
 		<h3>Queue Stats:</h3>
 		<table class="ui celled structured table">
@@ -26,11 +44,11 @@
 			<tbody>
 				<tr>
 					<td>All</td>
-					<td><a href="/bull/active"><%=overall_stats.active%></a></td>
-					<td><a href="/bull/inactive"><%=overall_stats.waiting%></a></td>
-					<td><a href="/bull/delayed"><%=overall_stats.delayed%></a></td>
-					<td><a href="/bull/failed"><%=overall_stats.failed%></a></td>
-					<td><a href="/bull/complete"><%=overall_stats.completed%></a></td>
+					<td><a href="/bull/<%=req.params.queue%>/active"><%=overall_stats.active%></a></td>
+					<td><a href="/bull/<%=req.params.queue%>/inactive"><%=overall_stats.waiting%></a></td>
+					<td><a href="/bull/<%=req.params.queue%>/delayed"><%=overall_stats.delayed%></a></td>
+					<td><a href="/bull/<%=req.params.queue%>/failed"><%=overall_stats.failed%></a></td>
+					<td><a href="/bull/<%=req.params.queue%>/complete"><%=overall_stats.completed%></a></td>
 					
 				</tr>
 				<!--  -->
@@ -48,6 +66,7 @@
 					<th>Next Execution</th>
 					<th>End Date</th>
 					<th>Delete Repeat</th>
+					<th>Do now</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -61,6 +80,11 @@
 					<td class="center aligned">
 						<button class="circular red ui icon button delete_repeat" data-id='<%=repeat.key%>'>
 							<i class="icon delete"></i>
+						</button>
+					</td>
+					<td class="center aligned">
+						<button class="circular green ui icon button do_now" data-id='<%=repeat.name%>'>
+							<i class="icon plus"></i>
 						</button>
 					</td>
 				</tr>
@@ -88,7 +112,7 @@
 			// var job_id='';
 			var r = confirm("Delete this permanently ?");
 			if (r == true) {
-				$.post("/bull/repeat/delete", {name: repeat_name}, function(result,status){
+				$.post("/bull/<%=req.params.queue%>/repeat/delete", {name: repeat_name}, function(result,status){
 				console.log('result = '+result);
 				console.log('status = '+status);// this runs only on sucess
 				if(status=='success'){
@@ -100,7 +124,24 @@
 				$(button).removeClass('loading');
 			}
 		});
+		$('.do_now').click(function(){
+			var button = this;
+			$(button).addClass('loading');
+			var repeat_name=$(this).attr('data-id');
+			// var job_id='';
+			// var r = confirm("Delete this permanently ?");
+			$.post("/bull/<%=req.params.queue%>/job/add", {name: repeat_name}, function(result,status){
+				console.log('result = '+result);
+				console.log('status = '+status);// this runs only on sucess
+				if(status=='success'){
+					$(button).removeClass('loading');
+					$(button).addClass('disabled');
+				}
+			});
+			
+		});
 	});
+	$('.dropdown').dropdown();
 	var path = window.location.pathname;
 	$('a[href="'+path+'"]').addClass('active');
 </script>

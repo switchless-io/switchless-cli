@@ -13,7 +13,7 @@
 					Recreate a job
 				</h2>
 				<br>
-				<form class="ui form " action="/bull/job/add" method='post'>
+				<form class="ui form " action="/bull/<%=req.params.queue%>/job/add" method='post'>
 					
 					<div class="field">
 						<label>Job name</label>

@@ -8,14 +8,13 @@ var async = require('async');
 
 var Bull = require( 'bull' );
 	// create our job queue
-var queue = new Bull('queue',{redis:sails.config.bull.redis});
+
 module.exports = {
 	index:function(req,res){
+		var queue = new Bull(req.params.queue,{redis:sails.config.bull.redis});
 		var job_stats=[];
-		
 		queue.getJobCounts().then(function(counts){
 			queue.getRepeatableJobs().then(function(repeats){
-
 				var locals={
 					job_stats:[],
 					overall_stats:counts,
@@ -25,11 +24,10 @@ module.exports = {
 				}
 				res.view('bull/index',locals);
 			})
-			
 		});
 	},
-
 	listItems:function(req,res){
+		var queue = new Bull(req.params.queue,{redis:sails.config.bull.redis});
 		// var JSON = require('flatted');
 		console.log('\n\n\n\n\n\n======================');
 		console.log('inside listItemsInBull');
@@ -44,19 +42,19 @@ module.exports = {
 		var getJobs;
 		switch(state){
 			case 'active':
-				getJobs=queue.getActive();
+				getJobs=queue.getActive(0,99);
 				break;
 			case 'failed':
-				getJobs=queue.getFailed();
+				getJobs=queue.getFailed(0,99);
 				break;
 			case 'inactive':
-				getJobs=queue.getWaiting();
+				getJobs=queue.getWaiting(0,99);
 				break;
 			case 'complete':
-				getJobs=queue.getCompleted();
+				getJobs=queue.getCompleted(0,99);
 				break;
 			case 'delayed':
-				getJobs=queue.getDelayed();
+				getJobs=queue.getDelayed(0,99);
 				break; 
 		}
 		console.log('came until here');
@@ -82,6 +80,7 @@ module.exports = {
 		});
 	},
 	retryJob:function(req,res){
+		var queue = new Bull(req.params.queue,{redis:sails.config.bull.redis});
 		var job_id=req.body.job_id?req.body.job_id:'';
 		console.log(job_id);
 		if(job_id=='')
@@ -92,9 +91,9 @@ module.exports = {
 				res.send(200,'ok')
 			})
 		});
-		
 	},
 	deleteJob:function(req,res){
+		var queue = new Bull(req.params.queue,{redis:sails.config.bull.redis});
 		var job_id=req.body.job_id?req.body.job_id:'';
 		console.log(job_id);
 		if(job_id=='')
@@ -107,14 +106,15 @@ module.exports = {
 		});
 	},
 	restartQueueConnection:function(req,res){
+		var queue = new Bull(req.params.queue,{redis:sails.config.bull.redis});
 		sails.config.queue.close().then(function(){
 			sails.config.queue=new Bull('queue',{redis:sails.config.bull.redis});
 		}).catch(function(err){
 			console.log(err);
 		})
 	},
-
 	deleteRepeatJob: function(req, res){
+		var queue = new Bull(req.params.queue,{redis:sails.config.bull.redis});
 		var name = req.body.name?req.body.name:'';
 		if(!name)
 			return res.send(400,'bad request');
@@ -124,10 +124,15 @@ module.exports = {
 		});
 	},
 	addJob:async function(req,res){
-		await queue.add(req.body.name,JSON.parse(req.body.data));
-		res.redirect('/bull');
+		var queue = new Bull(req.params.queue,{redis:sails.config.bull.redis});
+		if(typeof req.body.data =='string')
+			req.body.data=JSON.parse(req.body.data)
+		await queue.add(req.body.name,req.body.data);
+		res.send('ok');
+		// res.redirect('/bull/'+req.params.queue);
 	},
 	recreateJob:async function(req,res){
+		var queue = new Bull(req.params.queue,{redis:sails.config.bull.redis});
 		var locals={
 			moment: require('moment-timezone'),
 			layout: 'bull/layout'
