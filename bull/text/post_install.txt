@@ -8,13 +8,14 @@ You will need to define the routes and policies manually.
   Manual intervention required: 
 
 1) ### Add this to routes.js ###
-'GET /bull':'BullController.index',
-'GET /bull/:state':'BullController.listItems',
-'POST /bull/retry':'BullController.retryJob',
-'POST /bull/delete':'BullController.deleteJob',
-'POST /bull/repeat/delete':'BullController.deleteRepeatJob',
-'POST /bull/job/add':'BullController.addJob',
-'GET /bull/job/:job_id/recreate':'BullController.recreateJob',
+// Bull related tasks
+'GET /bull/:queue':'BullController.index',
+'GET /bull/:queue/:state':'BullController.listItems',
+'POST /bull/:queue/retry':'BullController.retryJob',
+'POST /bull/:queue/delete':'BullController.deleteJob',
+'POST /bull/:queue/repeat/delete':'BullController.deleteRepeatJob',
+'POST /bull/:queue/job/add':'BullController.addJob',
+'GET /bull/:queue/job/:job_id/recreate':'BullController.recreateJob',
 
 2) ### Update policy.js ###
 BullController:{\
